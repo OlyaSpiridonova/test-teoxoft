@@ -17,5 +17,14 @@ provide('store', store);
   padding: 0;
   border: none;
   text-decoration: none;
+
+  // bg-color
+  --primary-bg-color: #349cef;
+  --secondary-bg-color: #68b4f1;
+
+  // text-color
+  --primary-text-color: #1628c7;
+  --secondary-text-color: #3745be;
 }
+
 </style>

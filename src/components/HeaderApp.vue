@@ -9,13 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    background: #349cef;
+    background: var(--primary-bg-color);
     padding: 20px;
 
     &__logo {
       font-size: 24px;
       font-weight: 700;
-      color: #1628c7;
+      color: var(--primary-text-color);
     }
 }
 </style>
