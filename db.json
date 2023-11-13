@@ -1,0 +1,28 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstname": "Ivan",
+      "lastname": "Ivanov",
+      "experience": 10,
+      "age": 30,
+      "address": "Moscow"
+    },
+    {
+      "id": 2,
+      "firstname": "Maria",
+      "lastname": "Ivanova",
+      "experience": 5,
+      "age": 25,
+      "address": "Moscow"
+    },
+    {
+      "firstname": "test",
+      "lastname": "test",
+      "experience": "test",
+      "age": "test",
+      "address": "test",
+      "id": 3
+    }
+  ]
+}
