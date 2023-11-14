@@ -16,5 +16,6 @@ import ListEmployees from '@/components/ListEmployees.vue';
     flex-direction: column;
     align-items: center;
     padding: 30px;
+    overflow: auto;
 }
 </style>
