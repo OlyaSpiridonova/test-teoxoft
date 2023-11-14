@@ -5,7 +5,7 @@
       title="Registering and editing employee data"
       @close="handleClose"
       >
-        <form ref="regForm" class="form" @submit.prevent="handleSubmit ">
+        <form class="form" @submit.prevent="handleSubmit ">
             <template v-for="input in newEmployee" :key="input">
                 <label :for="input.placeholder" class="form__label">
                     <span>{{ `Your ${input.placeholder}` }}</span>
@@ -19,12 +19,7 @@
                     <span v-if="input.error" class="form__error">{{ input.error }}</span>
                 </label>
             </template>
-            <BaseButton
-                v-if="state.editableEmployee"
-                @click="handleSubmit"
-                >
-                Save changes
-            </BaseButton>
+            <BaseButton v-if="state.editableEmployee" @click="handleSubmit">Save change</BaseButton>
             <BaseButton v-else>Add a new employee</BaseButton>
         </form>
     </BaseDialog>
@@ -40,7 +35,6 @@ import store from '../store/index';
 
 const { state, submitForm, editEmployee } = inject('store', store);
 
-const regForm = ref(null);
 const newEmployee = ref({
   firstname: { model: '', type: 'text', placeholder: 'firstname' },
   lastname: { model: '', type: 'text', placeholder: 'lastname' },

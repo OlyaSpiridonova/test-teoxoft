@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'https://test-teoxft-server.vercel.app/';
 
 const state = reactive({
   employees: [],
@@ -11,8 +11,7 @@ const state = reactive({
 async function fetchData(url) {
   try {
     const request = await fetch(baseUrl + url);
-    const response = await request.json();
-    state.employees = response;
+    state.employees = await request.json();
   } catch (error) {
     console.error(error);
   }
