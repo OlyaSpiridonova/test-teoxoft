@@ -1,17 +1,22 @@
 <template>
     <BaseButton v-if="!state.isOpenForm" @click="openModal">Register a new employee</BaseButton>
-    <BaseDialog :show="state.isOpenForm" title="Register new Employee" @close="handleClose">
-        <form ref="regForm" class="form" @submit.prevent="">
+    <BaseDialog
+      :show="state.isOpenForm"
+      title="Registering and editing employee data"
+      @close="handleClose"
+      >
+        <form ref="regForm" class="form" @submit.prevent="handleSubmit ">
             <template v-for="input in newEmployee" :key="input">
                 <label :for="input.placeholder" class="form__label">
                     <span>{{ `Your ${input.placeholder}` }}</span>
                     <input
-                        type="text"
+                        :type="input.type"
                         v-model="input.model"
                         :placeholder="input.placeholder"
                         :id="input.placeholder"
-                        class="form__input"
+                        :class="{form__input: input, form__input_error: input.error}"
                     />
+                    <span v-if="input.error" class="form__error">{{ input.error }}</span>
                 </label>
             </template>
             <BaseButton
@@ -20,7 +25,7 @@
                 >
                 Save changes
             </BaseButton>
-            <BaseButton v-else @click="handleSubmit">Add a new employee</BaseButton>
+            <BaseButton v-else>Add a new employee</BaseButton>
         </form>
     </BaseDialog>
 </template>
@@ -37,11 +42,11 @@ const { state, submitForm, editEmployee } = inject('store', store);
 
 const regForm = ref(null);
 const newEmployee = ref({
-  firstname: { model: '', placeholder: 'firstname' },
-  lastname: { model: '', placeholder: 'lastname' },
-  experience: { model: '', placeholder: 'experience' },
-  age: { model: '', placeholder: 'age' },
-  address: { model: '', placeholder: 'address' },
+  firstname: { model: '', type: 'text', placeholder: 'firstname' },
+  lastname: { model: '', type: 'text', placeholder: 'lastname' },
+  experience: { model: '', type: 'number', placeholder: 'experience' },
+  age: { model: '', type: 'number', placeholder: 'age' },
+  address: { model: '', type: 'text', placeholder: 'address' },
 });
 
 function openModal() {
@@ -53,6 +58,7 @@ function handleClose() {
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in newEmployee.value) {
     newEmployee.value[key].model = '';
+    newEmployee.value[key].error = '';
   }
 }
 
@@ -70,8 +76,12 @@ function handleSubmit() {
   const request = {};
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in newEmployee.value) {
+    newEmployee.value[key].error = '';
+    if (newEmployee.value[key].model === '') {
+      newEmployee.value[key].error = 'Необходимо заполнить';
+      return;
+    }
     request[key] = newEmployee.value[key].model;
-    newEmployee.value[key].model = '';
   }
   if (editableEmployee.value) {
     const { id } = editableEmployee.value[0];
@@ -108,6 +118,12 @@ function handleSubmit() {
         &:focus-visible {
             outline: 2px dashed rgb(0, 153, 255);
         }
+        &_error {
+          border: 2px solid red;
+        }
+    }
+    &__error {
+      color: red;
     }
 }
 </style>
