@@ -1,7 +1,7 @@
 # test-teoxft
 # 👩‍💻 SPA - Editable list of employees 👩‍💻
 
-Посмотреть demo-версию можно тут: https://65532f8ebd48800008ec90e5--shimmering-belekoy-52a262.netlify.app/
+Посмотреть demo-версию можно тут: https://shimmering-belekoy-52a262.netlify.app/
 
 ### Autor: Spiridonova Olga
 

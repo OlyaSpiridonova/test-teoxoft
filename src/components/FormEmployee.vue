@@ -14,6 +14,8 @@
                         v-model="input.model"
                         :placeholder="input.placeholder"
                         :id="input.placeholder"
+                        :min="input.min"
+                        :max="input.max"
                         :class="{form__input: input, form__input_error: input.error}"
                     />
                     <span v-if="input.error" class="form__error">{{ input.error }}</span>
@@ -36,25 +38,16 @@ import store from '../store/index';
 const { state, submitForm, editEmployee } = inject('store', store);
 
 const newEmployee = ref({
-  firstname: { model: '', type: 'text', placeholder: 'firstname' },
-  lastname: { model: '', type: 'text', placeholder: 'lastname' },
-  experience: { model: '', type: 'number', placeholder: 'experience' },
-  age: { model: '', type: 'number', placeholder: 'age' },
-  address: { model: '', type: 'text', placeholder: 'address' },
+  firstname: { model: '', type: 'text', placeholder: 'Firstname' },
+  lastname: { model: '', type: 'text', placeholder: 'Lastname' },
+  experience: {
+    model: '', type: 'number', placeholder: 'Experience', min: 1, max: 99,
+  },
+  age: {
+    model: '', type: 'number', placeholder: 'Age', min: 1, max: 99,
+  },
+  address: { model: '', type: 'text', placeholder: 'Address' },
 });
-
-function openModal() {
-  state.isOpenForm = true;
-}
-function handleClose() {
-  state.isOpenForm = false;
-  state.editableEmployee = null;
-  // eslint-disable-next-line no-restricted-syntax, guard-for-in
-  for (const key in newEmployee.value) {
-    newEmployee.value[key].model = '';
-    newEmployee.value[key].error = '';
-  }
-}
 
 const editableEmployee = computed(() => state.editableEmployee);
 watch(editableEmployee, () => {
@@ -65,6 +58,20 @@ watch(editableEmployee, () => {
     }
   }
 });
+
+function openModal() {
+  state.isOpenForm = true;
+}
+
+function handleClose() {
+  state.isOpenForm = false;
+  state.editableEmployee = null;
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const key in newEmployee.value) {
+    newEmployee.value[key].model = '';
+    newEmployee.value[key].error = '';
+  }
+}
 
 function handleSubmit() {
   const request = {};
@@ -102,7 +109,7 @@ function handleSubmit() {
         gap: 8px;
         flex-direction: column;
         color: var(--primary-text-color);
-        font-weight: 500;
+        font-weight: 400;
     }
     &__input {
         border-radius: 10px;
@@ -119,5 +126,9 @@ function handleSubmit() {
     &__error {
       color: red;
     }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 </style>

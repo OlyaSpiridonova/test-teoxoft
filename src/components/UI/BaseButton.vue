@@ -34,7 +34,6 @@ const props = defineProps({
   a {
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    font: inherit;
     background-color: var(--primary-bg-color);
     border: 1px solid var(--primary-bg-color);
     color: var(--primary-text-color);
@@ -71,6 +70,7 @@ const props = defineProps({
     border-color: var(--primary-bg-color);
     color: var(--primary-bg-color);
     border-radius: 5px;
+    font-weight: 400;
   }
   .outline:hover,
   .outline:active,

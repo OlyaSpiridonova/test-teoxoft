@@ -79,6 +79,7 @@ td, th {
     text-align: center;
     color: var(--primary-text-color);
     padding: 8px;
+    font-size: 14px;
 }
 
 tr:nth-child(even) {
